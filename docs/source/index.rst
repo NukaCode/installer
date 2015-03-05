@@ -33,7 +33,7 @@ Make sure to place the ``~/.composer/vendor/bin`` directory in your PATH so the 
 
 .. code::
 
-    echo 'export PATH="$HOME/vendor/bin:$PATH' >> ~/.bash_profile
+    echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bash_profile
     source ~/.bash_profile
 
 Usage
