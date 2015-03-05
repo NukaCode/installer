@@ -25,10 +25,11 @@ class NewCommand extends \Symfony\Component\Console\Command\Command {
     protected function configure()
     {
         $this->setName('new')
-             ->setDescription('Create a new Laravel application.')
-             ->addArgument('name', InputArgument::REQUIRED)
-             ->addOption('slim', null, InputOption::VALUE_NONE)
-             ->addOption('force', null, InputOption::VALUE_NONE);
+            ->setDescription('Create a new Laravel application.')
+            ->addArgument('name', InputArgument::REQUIRED)
+            ->addOption('slim', null, InputOption::VALUE_NONE)
+            ->addOption('force', null, InputOption::VALUE_NONE)
+            ->addOption('laravelOnly', null, InputOption::VALUE_NONE);
     }
 
     /**
@@ -185,11 +186,15 @@ class NewCommand extends \Symfony\Component\Console\Command\Command {
      */
     protected function makeFilename()
     {
-        if ($this->input->getOption('slim')) {
-            return getcwd() . '/laravel_slim.zip';
+        if ($this->input->getOption('laravelOnly')) {
+            return dirname(__FILE__) . '/laravel_only.zip';
         }
 
-        return getcwd() . '/laravel_full.zip';
+        if ($this->input->getOption('slim')) {
+            return dirname(__FILE__) . '/laravel_slim.zip';
+        }
+
+        return dirname(__FILE__) . '/laravel_full.zip';
     }
 
     /**
@@ -199,6 +204,10 @@ class NewCommand extends \Symfony\Component\Console\Command\Command {
      */
     protected function getBuildFileLocation()
     {
+        if ($this->input->getOption('laravelOnly')) {
+            return 'http://cabinet.laravel.com/latest.zip';
+        }
+
         if ($this->input->getOption('slim')) {
             return 'http://builds.nukacode.com/slim/latest.zip';
         }

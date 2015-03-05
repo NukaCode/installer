@@ -2,6 +2,7 @@
 .DS_Store
 .idea/
 atlassian-ide-plugin.xml
-laravel_full.zip
-laravel_slim.zip
+/src/laravel_full.zip
+/src/laravel_slim.zip
+/src/laravel_only.zip
 /docs/build

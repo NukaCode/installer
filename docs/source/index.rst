@@ -2,6 +2,8 @@ Welcome to NukaCode Installer
 ================================
 This is a modified version of the laravel installer. It allows you to install a fully configured version of the NukaCode Framework.
 
+.. note:: This installer will conflict with the normal laravel installer.
+
 =======
 Badges
 =======
@@ -53,6 +55,14 @@ By adding the ``--slim`` flag you can install a minimal version of the NukaCode 
 .. code::
 
     laravel new blog --slim
+
+Laravel Only
+~~~~~~~~~~~~
+If you only want laravel without the NukaCode framework then you can add the ``--laravelOnly`` flag.
+
+.. code::
+
+    laravel new blog --laravelOnly
 
 Build Cache
 -----------
