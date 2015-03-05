@@ -29,7 +29,7 @@ Run the following composer command to install the nukacode installer globally.
 
 .. code::
 
-    composer global require "nukacode/installer=~2.0"
+    composer global require "nukacode/installer=~2.1"
 
 Make sure to place the ``~/.composer/vendor/bin`` directory in your PATH so the laravel executable can be located by your system.
 
