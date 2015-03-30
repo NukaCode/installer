@@ -74,3 +74,11 @@ You can force the installer to download a new copy by adding the ``--force`` fla
 .. code::
 
     laravel new blog --force
+
+Pre-download Application Data
+-----------------------------
+This command allows you to download the nukacode slim and full application data so that you wont have to during the install. Best used as a nightly cron.
+
+.. code::
+
+    laravel download

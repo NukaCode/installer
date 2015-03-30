@@ -1,6 +1,8 @@
 <?php namespace Laravel\Installer\Console;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Event\ProgressEvent;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,12 +11,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 use ZipArchive;
 
-class NewCommand extends \Symfony\Component\Console\Command\Command {
+class NewCommand extends Command {
 
     private $input;
+
     private $output;
+
     private $directory;
+
     private $zipFile;
+
     private $progress = 0;
 
     /**
@@ -25,11 +31,11 @@ class NewCommand extends \Symfony\Component\Console\Command\Command {
     protected function configure()
     {
         $this->setName('new')
-            ->setDescription('Create a new Laravel application.')
-            ->addArgument('name', InputArgument::REQUIRED)
-            ->addOption('slim', null, InputOption::VALUE_NONE)
-            ->addOption('force', null, InputOption::VALUE_NONE)
-            ->addOption('laravelOnly', null, InputOption::VALUE_NONE);
+             ->setDescription('Create a new Laravel application.')
+             ->addArgument('name', InputArgument::REQUIRED)
+             ->addOption('slim', null, InputOption::VALUE_NONE)
+             ->addOption('force', null, InputOption::VALUE_NONE)
+             ->addOption('laravelOnly', null, InputOption::VALUE_NONE);
     }
 
     /**
@@ -227,14 +233,14 @@ class NewCommand extends \Symfony\Component\Console\Command\Command {
         $progressBar = new ProgressBar($this->output, 100);
         $progressBar->start();
 
-        $client  = new \GuzzleHttp\Client();
+        $client  = new Client();
         $request = $client->createRequest('GET', $buildUrl);
         $request->getEmitter()->on('progress', function (ProgressEvent $e) use ($progressBar) {
             if ($e->downloaded > 0) {
                 $localProgress = floor(($e->downloaded / $e->downloadSize * 100));
 
                 if ($localProgress != $this->progress) {
-                    $this->progress = (integer) $localProgress;
+                    $this->progress = (integer)$localProgress;
                     $progressBar->advance();
                 }
             }
@@ -257,7 +263,7 @@ class NewCommand extends \Symfony\Component\Console\Command\Command {
     protected function checkIfServerHasNewerBuild()
     {
         if (file_exists($this->zipFile)) {
-            $client  = new \GuzzleHttp\Client();
+            $client   = new Client();
             $response = $client->get('http://builds.nukacode.com/files.php');
 
             // The downloaded copy is the same as the one on the server.
