@@ -15,6 +15,7 @@ Badges
     :target: https://packagist.org/packages/nukacode/installer
 .. image:: https://poser.pugx.org/nukacode/installer/license.svg
     :target: https://packagist.org/packages/nukacode/installer
+
 =====
 
 Links
@@ -63,6 +64,14 @@ If you only want laravel without the NukaCode framework then you can add the ``-
 .. code::
 
     laravel new blog --laravelOnly
+
+Laravel Lumen
+~~~~~~~~~~~~~
+If you want laravel lumen without the NukaCode framework then you can add the ``--lumen`` flag.
+
+.. code::
+
+    laravel new blog --lumen
 
 Build Cache
 -----------

@@ -35,7 +35,8 @@ class NewCommand extends Command {
              ->addArgument('name', InputArgument::REQUIRED)
              ->addOption('slim', null, InputOption::VALUE_NONE)
              ->addOption('force', null, InputOption::VALUE_NONE)
-             ->addOption('laravelOnly', null, InputOption::VALUE_NONE);
+             ->addOption('laravelOnly', null, InputOption::VALUE_NONE)
+             ->addOption('lumen', null, InputOption::VALUE_NONE);
     }
 
     /**
@@ -62,7 +63,10 @@ class NewCommand extends Command {
 
         $this->extract();
 
-        $this->runComposerCommands();
+        // Lumen does not have composer post install scripts.
+        if (!$this->input->getOption('lumen')) {
+            $this->runComposerCommands();
+        }
 
         $output->writeln('<comment>Application ready! Build something amazing.</comment>');
     }
@@ -192,6 +196,10 @@ class NewCommand extends Command {
      */
     protected function makeFilename()
     {
+        if ($this->input->getOption('lumen')) {
+            return dirname(__FILE__) . '/lumen.zip';
+        }
+
         if ($this->input->getOption('laravelOnly')) {
             return dirname(__FILE__) . '/laravel_only.zip';
         }
@@ -210,6 +218,10 @@ class NewCommand extends Command {
      */
     protected function getBuildFileLocation()
     {
+        if ($this->input->getOption('lumen')) {
+            return 'http://cabinet.laravel.com/latest_lumen.zip';
+        }
+
         if ($this->input->getOption('laravelOnly')) {
             return 'http://cabinet.laravel.com/latest.zip';
         }
