@@ -53,15 +53,21 @@ class DownloadCommand extends Command {
         $md5HashLocation = 'http://builds.nukacode.com/files.php';
         $slimZipLocation = dirname(__FILE__) . '/laravel_slim.zip';
         $fullZipLocation = dirname(__FILE__) . '/laravel_full.zip';
+        $lumenZipLocation = dirname(__FILE__) . '/lumen_full.zip';
 
         if ($this->checkIfServerHasNewerBuild($md5HashLocation, $slimZipLocation)) {
-            $this->cleanUp();
+            $this->cleanUp($slimZipLocation);
             $this->downloadFileWithProgressBar('http://builds.nukacode.com/slim/latest.zip', $slimZipLocation);
         }
 
         if ($this->checkIfServerHasNewerBuild($md5HashLocation, $fullZipLocation)) {
-            $this->cleanUp();
+            $this->cleanUp($fullZipLocation);
             $this->downloadFileWithProgressBar('http://builds.nukacode.com/full/latest.zip', $fullZipLocation);
+        }
+
+        if ($this->checkIfServerHasNewerBuild($md5HashLocation, $lumenZipLocation)) {
+            $this->cleanUp($lumenZipLocation);
+            $this->downloadFileWithProgressBar('http://builds.nukacode.com/lumen/latest.zip', $lumenZipLocation);
         }
 
         return $this;
@@ -70,12 +76,14 @@ class DownloadCommand extends Command {
     /**
      * Clean-up the Zip file.
      *
+     * @param the zip file to remove
+     *
      * @return $this
      */
-    protected function cleanUp()
+    protected function cleanUp($zipFile)
     {
-        @chmod($this->zipFile, 0777);
-        @unlink($this->zipFile);
+        @chmod($zipFile, 0777);
+        @unlink($zipFile);
 
         return $this;
     }

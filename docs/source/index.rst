@@ -49,6 +49,9 @@ This method of installation is much faster than installing via Composer:
 
     laravel new blog
 
+Install Options
+---------------
+
 Slim Build
 ~~~~~~~~~~
 By adding the ``--slim`` flag you can install a minimal version of the NukaCode Framework. This only includes Laravel base and core.
@@ -65,13 +68,21 @@ If you only want laravel without the NukaCode framework then you can add the ``-
 
     laravel new blog --laravelOnly
 
-Laravel Lumen
-~~~~~~~~~~~~~
-If you want laravel lumen without the NukaCode framework then you can add the ``--lumen`` flag.
+Lumen Build
+~~~~~~~~~~~
+If you want laravel lumen with the NukaCode framework then you can add the ``--lumen`` flag.
 
 .. code::
 
     laravel new blog --lumen
+
+Laravel Lumen Only
+~~~~~~~~~~~~~~~~~~
+If you want laravel lumen without the NukaCode framework then you can add the ``--lumenOnly`` flag.
+
+.. code::
+
+    laravel new blog --lumenOnly
 
 Build Cache
 -----------
@@ -86,7 +97,7 @@ You can force the installer to download a new copy by adding the ``--force`` fla
 
 Pre-download Application Data
 -----------------------------
-This command allows you to download the nukacode slim and full application data so that you wont have to during the install. Best used as a nightly cron.
+This command allows you to download the nukacode slim, full and lumen application data so that you wont have to during the install. Best used as a nightly cron.
 
 .. code::
 
