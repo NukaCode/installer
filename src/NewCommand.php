@@ -1,5 +1,7 @@
 <?php namespace Laravel\Installer\Console;
 
+ini_set('memory_limit', '1G');
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Event\ProgressEvent;
 use Symfony\Component\Console\Command\Command;
